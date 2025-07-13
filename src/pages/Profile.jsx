@@ -58,11 +58,11 @@ useEffect(() => {
     <Container>
       <div className="py-8">
         {
-          userData ? (<div className="flex items-center space-x-4 mb-6 bg-white md:p-10 p-5 rounded-xl">
+          userData ? (<div className="flex md:items-center items-start md:flex-row flex-col space-x-4 mb-6 bg-white md:p-10 p-6 rounded-xl">
           <img
             src={avatarUrl || "https://ui-avatars.com/api/?name=User"}
             alt="avatar"
-            className="w-50 h-50 rounded-full object-cover object-top"
+            className="w-50 h-50 md:rounded-full rounded-3xl object-cover object-top"
           />
           <div>
             <h2 className="text-[50px] font-semibold">{userData?.name || "Name not Found" }</h2>

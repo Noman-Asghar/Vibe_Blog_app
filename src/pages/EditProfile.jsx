@@ -69,8 +69,8 @@ const handleUpload = async () => {
 
 
   return (
-    <div className="max-w-md h-screen flex items-center justify-center mx-auto py-10">
-     <div className='bg-amber-50 p-20 rounded-2xl'>
+    <div className="md:max-w-md h-screen flex items-center justify-center mx-auto py-10 px-3">
+     <div className='bg-amber-50 py-20 md:px-20 px-5 rounded-2xl'>
        <h2 className="text-2xl font-bold mb-4">Update Profile</h2>
       <input
         type="file"

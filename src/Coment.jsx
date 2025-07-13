@@ -72,7 +72,7 @@ const handleComentDelete = async(comentId) => {
         />
         <button
           onClick={handleComentSubmit}
-          className="mt-2 px-4 py-4 font-bold bg-blue-600 text-white rounded"
+          className="mt-2 px-4 md:py-4 py-2  md:font-bold semi-bold bg-blue-600 text-white rounded"
         >
           Post Comment
         </button>
@@ -96,7 +96,7 @@ const handleComentDelete = async(comentId) => {
     </div>
    {
      userData?.$id  === c.userId && (
-         <button className='h-14 px-8 rounded-lg bg-blue-600 text-white font-bold' onClick={() => handleComentDelete(c.$id)}>Delete</button>
+         <button className='md:h-14 h-12 md:px-8 px-5 rounded-lg bg-blue-600 md:font-bold semi-bold text-white ' onClick={() => handleComentDelete(c.$id)}>Delete</button>
      )
    }
  </div>

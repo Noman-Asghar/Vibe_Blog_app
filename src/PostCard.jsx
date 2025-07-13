@@ -34,7 +34,7 @@ const PostCard = ({ $id, title, userName, content, featuredImage, postId, userId
             <img
               src={userProfile.avatarUrl}
               alt="User Avatar"
-              className="w-16 h-16 rounded-full object-cover"
+              className="w-16 h-16 rounded-full object-cover object-top"
             />
           )}
           <h1 className="text-xl text-gray-700 font-semibold">{userName}</h1>
@@ -55,12 +55,12 @@ const PostCard = ({ $id, title, userName, content, featuredImage, postId, userId
       </Link>
 
       <div
-        className={`flex justify-around py-4 items-center text-xl font-bold transition-all bg-gray-300 ${
+        className={`flex justify-around py-4 items-center md:text-xl text-small font-bold transition-all bg-gray-300 ${
           isHide ? 'rounded-none border border-gray-400' : 'rounded-b-2xl'
         }`}
       >
         <LikePage postId={$id} />
-        <p onClick={handlecommentToggle}>Comments</p>
+        <p onClick={handlecommentToggle}>💬 Comments</p>
         <p>Share</p>
       </div>
 
