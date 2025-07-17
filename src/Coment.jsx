@@ -14,39 +14,49 @@ const ComentPage = ({postId}) => {
 // console.log("userData:", userData);
     
 useEffect(() => {
-  // Load comments
-  comentService.getUserComments(postId).then((res) => {
-    if (res) setComents(res.documents);
+  comentService.getUserComments(postId).then(async (res) => {
+    if (res) {
+      const commentsWithAvatars = await Promise.all(
+        res.documents.map(async (comment) => {
+          const profile = await appwriteService.getUserProfile(comment.userId);
+          const avatarUrl = profile?.avatarImage
+            ? appwriteService.getFileView(profile.avatarImage)
+            : "";
+
+          return { ...comment, avatarImage: avatarUrl };
+        })
+      );
+      setComents(commentsWithAvatars);
+    }
   });
-
-  // Load avatar from profile
-  if (userData?.$id) {
-    appwriteService.getUserProfile(userData.$id).then((profile) => {
-      if (profile?.avatarImage) {
-        const imageUrl = appwriteService.getFileView(profile.avatarImage);
-        setUserProfile({ avatarUrl: imageUrl }); // Save usable URL
-      }
-    });
-  }
-}, [postId, userData]);
+}, [postId]);
 
 
-   const handleComentSubmit = async () => {
+
+  const handleComentSubmit = async () => {
   if (!newComent.trim()) return;
 
   const comment = await comentService.createComments({
     postId,
     userId: userData.$id,
-    name: userData.name, 
-    avatarImage: userProfile?.avatarUrl || "", 
+    name: userData.name,
     content: newComent
   });
 
   if (comment) {
-    setComents([...coments, comment]);
+    
+    const profile = await appwriteService.getUserProfile(userData.$id);
+    const avatarUrl = profile?.avatarImage
+      ? appwriteService.getFileView(profile.avatarImage)
+      : "";
+
+    const commentWithAvatar = { ...comment, avatarImage: avatarUrl };
+
+    setComents([...coments, commentWithAvatar]);
     setNewComent("");
   }
 };
+
 
 const handleComentDelete = async(comentId) => {
 
